@@ -15,7 +15,7 @@
 
 **⚠️ 注意**
 
-> 预设包内置的默认验证地址 `https://mb3admin.megm.workers.dev/` **不保证长期可用**（可能受 DNS 污染、服务商限制等因素影响）。
+> 自带的默认验证地址 `https://mb3admin.megm.workers.dev/` 运行在 cloudflare workers ，**不保证长期可用**（可能受 DNS 污染、服务商限制等因素影响）。  
 > 为了获得更稳定的体验，你也可以使用下面的**自定义构建**方法。
 
 ## ⚙️ 配置说明

@@ -20,11 +20,34 @@
 **⚠️ 注意**
 
 > 预设包内置的默认验证地址 `https://mb3admin.megm.workers.dev/` **不保证长期可用**（可能受 DNS 污染、服务商限制等因素影响）。
-> 为了获得更稳定的体验，建议使用下面的**自定义构建**方法。
+> 为了获得更稳定的体验，你也可以使用下面的**自定义构建**方法。
 
+## ⚙️ 配置说明
+
+在启动服务前，您需要修改 `docker-compose.yml` 文件，将服务器上的媒体路径挂载到容器中。
+
+请修改 `volumes` 部分，将 `/path/to/your/movies` 和 `/path/to/your/tvshows` 替换为您服务器上的实际路径。
+
+```yaml
+services:
+  emby:
+    # ... 其他配置 ...
+    volumes:
+      # emby 的配置目录
+      - ./config:/config
+
+      # 按需配置媒体目录
+      - ./data:/data
+      - ./path/to/your/movies:/movies # 电影媒体库，请修改为您的实际路径
+      - ./path/to/your/tvshows:/tv # 电视剧媒体库，请修改为您的实际路径
+
+      # 以下为系统数据，请勿修改
+      - ./system/Emby.Web.dll:/app/emby/system/Emby.Web.dll:ro
+      ...
+```
 ---
 
-## 🛠️ 自定义构建
+## 🛠️ 自定义构建（可选）
 
 此方法能让您通过自己的 GitHub 账户和 Cloudflare Worker 创建专属验证服务，稳定可靠。
 
@@ -52,32 +75,6 @@
 ### 步骤 3：部署
 
 解压 `docker-embyhack.zip` 文件，修改 `docker-compose.yml` 配置后，执行 `docker-compose up -d` 命令即可启动。
-
----
-
-## ⚙️ 配置说明
-
-在启动服务前，您需要修改 `docker-compose.yml` 文件，将服务器上的媒体路径挂载到容器中。
-
-请修改 `volumes` 部分，将 `/path/to/your/movies` 和 `/path/to/your/tvshows` 替换为您服务器上的实际路径。
-
-```yaml
-services:
-  emby:
-    # ... 其他配置 ...
-    volumes:
-      # emby 的配置目录
-      - ./config:/config
-
-      # 按需配置媒体目录
-      - ./data:/data
-      - ./path/to/your/movies:/movies # 电影媒体库，请修改为您的实际路径
-      - ./path/to/your/tvshows:/tv # 电视剧媒体库，请修改为您的实际路径
-
-      # 以下为系统数据，请勿修改
-      - ./system/Emby.Web.dll:/app/emby/system/Emby.Web.dll:ro
-      ...
-```
 
 -----
 

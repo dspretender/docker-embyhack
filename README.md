@@ -10,8 +10,6 @@
 
 ## 🚀 快速上手
 
-此方法适合希望立即体验的用户，但请注意，公共验证服务器的稳定性不作保证。
-
 1.  **下载 Release**：请从 [Releases 页面](https://github.com/OpenGG/docker-embyhack/releases) 下载最新的 `docker-embyhack.zip` 文件。
 2.  **解压文件**：解压后，您会得到 `docker-compose.yml` 文件和一个 `system/` 文件夹。
 3.  **修改配置**：主要调整 `docker-compose.yml` 文件中的媒体库路径映射。

@@ -28,7 +28,7 @@
 
 此方法能让您通过自己的 GitHub 账户和 Cloudflare Worker 创建专属验证服务，稳定可靠。
 
-#### 步骤 1：创建您的验证服务器
+### 步骤 1：创建您的验证服务器
 
 使用 Cloudflare Worker 是最简单的方式：
 
@@ -42,14 +42,14 @@
 * Nginx 配置示例: [mocks/nginx.conf](./mocks/nginx.conf)
 * Caddy 配置示例: [mocks/Caddyfile](./mocks/Caddyfile)
 
-#### 步骤 2：通过 GitHub Actions 自定义构建
+### 步骤 2：通过 GitHub Actions 自定义构建
 
 1.  **Fork 本仓库**：点击页面右上角的 "Fork" 按钮，将此项目复制到您的 GitHub 账户下。
 2.  **触发构建**：在 Fork 后的仓库页面，进入 "Actions" 标签页，选择 "Release" 工作流，点击 "Run workflow"。
 3.  **输入参数**：在 `your_mb3admin_replacement_url` 输入框中，填入上一步创建的 Cloudflare Worker URL。
 4.  **下载产物**：等待 Action 运行完成，下载打包好的 `docker-embyhack.zip` 文件。
 
-#### 步骤 3：部署
+### 步骤 3：部署
 
 解压 `docker-embyhack.zip` 文件，修改 `docker-compose.yml` 配置后，执行 `docker-compose up -d` 命令即可启动。
 
@@ -83,13 +83,29 @@ services:
 
 ## ❓ 常见问题 (FAQ)
 
-**Q1: 为什么需要替换验证服务器？**
+### Q1: 为什么需要替换验证服务器？
 
 A: Emby 客户端与服务器默认会向 `mb3admin.com` 发送请求以验证 Emby Premiere 许可证。
 
 本项目通过将此请求重定向到一个模拟的验证服务器来激活功能。您可以选择使用公共服务器，或为了稳定性自行搭建。
 
-**Q2: 关于“Support Emby”的提示？**
+### Q2：为什么不使用要修改 Emby 文件，而不是用中间人攻击 (MITM) 方案？
+
+**旧方案的不足**
+
+传统的中间人攻击（MITM）方案问题不少。
+
+它不仅需要复杂的 **HTTPS 证书管理**（得定期更新和信任证书），还限制了 Docker **网络模式的灵活性**（比如没法用 `network_mode=host`）。
+
+这使得网络配置复杂，并且**容易遇到 Docker DNS 不稳定**等网络故障，增加了部署难度和潜在问题。
+
+**新方案的优势**
+
+新方案通过**直接修改 Emby 内部文件**来替换认证地址，彻底解决了这些问题，且[改动极小](scripts/variables.yaml#L64..L70)。
+
+它无需证书管理，网络配置更自由、更稳定，**可以直接使用 host network，不依赖 Docker DNS**，同时大幅减少了故障点。这让部署更简单，体验也更流畅。
+
+### Q3: 关于“Support Emby”的提示？
 
 A: 进入 Emby 后台管理页面时，会在“设置”中看到一个“Support Emby”的提示。
 

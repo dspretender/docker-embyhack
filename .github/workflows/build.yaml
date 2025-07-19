@@ -3,24 +3,24 @@ on:
   workflow_dispatch:
     inputs:
       EMBY_VERSION:
-        description: "The Emby server version for this release (e.g., 4.8.11.0)."
+        description: "The Emby server version (e.g., 4.8.11.0)."
         type: string
         required: true
         default: 4.8.11.0
       EMBY_REPLACEMENT_URL:
         description: >-
-          URL for Emby's server replacement. Must starts with 'http' and end with a '/'.
+          URL for Emby's server replacement. Must starts with 'http' and end with '/'.
         type: string
         required: true
         default: https://mb3admin.megm.workers.dev/
-      remote_debug:
-        description: >-
-          Starts an SSH session to debug the runner. For advanced troubleshooting only.
-        type: boolean
-        required: false
-        default: false
+      # remote_debug:
+      #   description: >-
+      #     Starts an SSH session to debug the runner. For advanced troubleshooting only.
+      #   type: boolean
+      #   required: false
+      #   default: false
       publish: # New input for publishing
-        description: "Publish to GitHub Release and create a tag (as a draft first)"
+        description: "Publish to GitHub Release and create a tag"
         type: boolean
         required: false
         default: false

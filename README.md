@@ -6,8 +6,6 @@
 
 ![working](working.jpg)
 
----
-
 ## 🚀 快速上手
 
 1.  **下载 Release**：请从 [Releases 页面](https://github.com/OpenGG/docker-embyhack/releases) 下载最新的 `docker-embyhack.zip` 文件。

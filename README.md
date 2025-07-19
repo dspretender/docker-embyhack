@@ -2,7 +2,7 @@
 
 通过简单的 `docker-compose` 命令，快速搭建并激活您自己的 Emby 服务器。
 
-> **小提醒**：如果您的经济条件允许，请购买 Emby Premiere 来支持开发者。
+> **小提醒**：如果您的经济条件允许，请购买 [Emby Premiere](https://emby.media/premiere.html) 来支持开发者。
 
 ![working](working.jpg)
 
@@ -10,7 +10,7 @@
 
 此方法适合希望立即体验的用户，但公共验证服务器不保证稳定。
 
-1.  **下载 Release**：从 [Releases 页面](https://github.com/fejich/docker-embyhack/releases) 下载最新的 `docker-embyhack.zip` 文件。
+1.  **下载 Release**：从 [Releases 页面](https://github.com/OpenGG/docker-embyhack/releases) 下载最新的 `docker-embyhack.zip` 文件。
 2.  **解压文件**：解压后，您会得到 `docker-compose.yml` 文件和一个 `system/` 文件夹。
 3.  **修改配置**：修改 `docker-compose.yml` 文件，主要是映射您的媒体库路径。
 4.  **启动服务**：在文件所在目录，运行 `docker-compose up -d` 命令，即可启动 Emby 服务。
@@ -30,8 +30,12 @@
 
 1.  登录您的 Cloudflare 账户，进入 "Workers & Pages" 并创建一个新的 Worker。
 2.  将本项目 [mocks/worker.js](./mocks/worker.js) 文件中的代码**完整复制**到 Worker 中。
-3.  保存并部署该 Worker，得到一个专属的 URL。 请**务必在 URL 末尾加上斜杠 `/`**，最终格式为 `https://your-worker.your-name.workers.dev/`。
+3.  保存并部署该 Worker，得到一个专属的 URL。 请**务必在 URL 末尾加上斜杠 `/`**，最终格式为 `https://your-worker.workers.dev/`。
 4. （可选）如果 `workers.dev` 域名在你的区域不可用，可以在 Worker 后台绑定自定义域名。
+
+其他本地部署方案（适用于内网环境）：
+* Nginx 配置示例: [mocks/nginx.conf](./mocks/nginx.conf)
+* Caddy 配置示例: [mocks/Caddyfile](./mocks/Caddyfile)
 
 #### 步骤 2：通过 GitHub Actions 自定义构建
 

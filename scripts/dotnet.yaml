@@ -1,0 +1,45 @@
+version: '3'
+
+# silent: true
+
+includes:
+  shared: ./variables.yaml
+
+vars:
+  PATH_DEP_DOTNET_STAGING: "{{.PATH_DEP_DOTNET}}.staging"
+  PATH_DEP_DOTNET_STRING_REPLACER: "{{.PATH_DOTNET}}/StringReplacer/bin/Release/net8.0/linux-x64/publish/StringReplacer"
+  PATH_DEP_DOTNET_TEST_DLL: "{{.PATH_DOTNET}}/TestApp/bin/Release/net8.0/linux-x64/TestApp.dll"
+
+tasks:
+  dotnet:
+    desc: "Prepares the .NET build environment by ensuring the .NET SDK is installed."
+
+    status:
+      - test -f "{{.PATH_STRING_REPLACER}}"
+    cmds:
+      - |
+        rm -rf "{{.PATH_DEP_DOTNET_STAGING}}"
+        mkdir -p "{{.PATH_DEP_DOTNET_STAGING}}"
+
+      - task: dotnet-build
+      - cp "{{.PATH_DEP_DOTNET_STRING_REPLACER}}" "{{.PATH_STRING_REPLACER}}"
+      - echo "✅ .NET step complete."
+
+  dotnet-build:
+    desc: "Builds the .NET projects (TestApp, StringReplacer)."
+    internal: true
+    cmds:
+      - |
+        set -euo pipefail
+        echo "--- Building .NET Projects ---"
+        cd "{{.PATH_DOTNET}}"
+
+        ./test.sh
+        ./build.sh
+
+        test -f "{{.PATH_DEP_DOTNET_STRING_REPLACER}}" || { echo "StringReplacer build failed."; exit 1; }
+        test -f "{{.PATH_DEP_DOTNET_TEST_DLL}}" || { echo "TestApp build failed."; exit 1; }
+
+        chmod +x "{{.PATH_DEP_DOTNET_STRING_REPLACER}}"
+
+        echo "✅ .NET Build complete."

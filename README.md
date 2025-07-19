@@ -83,7 +83,7 @@ services:
 
 ## ❓ 常见问题 (FAQ)
 
-### Q1: 为什么需要替换验证服务器？
+### Q1: 为什么需要验证服务器？
 
 A: Emby 客户端与服务器默认会向 `mb3admin.com` 发送请求以验证 Emby Premiere 许可证。
 

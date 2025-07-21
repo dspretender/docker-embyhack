@@ -27,6 +27,7 @@ const pathConfig = {
   '/emby/Plugins/SecurityInfo': {
     SupporterKey: "",
     IsMBSupporter: true,
+  },
 };
 
 // Common CORS response headers.

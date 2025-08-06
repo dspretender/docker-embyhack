@@ -52,11 +52,6 @@ jobs:
           node-version: 22
           registry-url: https://registry.npmjs.org/
 
-      - name: Install Task
-        uses: arduino/setup-task@v2
-        with:
-          version: 3.44.0
-
       - name: Verify environment node
         run: |
           node --version

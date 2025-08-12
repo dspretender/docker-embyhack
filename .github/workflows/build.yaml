@@ -12,7 +12,7 @@ on:
           URL for Emby's server replacement. Must starts with 'http' and end with '/'.
         type: string
         required: true
-        default: https://mb3admin.megm.workers.dev/
+        default: https:/https://emby.baigong4-e03.workers.dev/
       # remote_debug:
       #   description: >-
       #     Starts an SSH session to debug the runner. For advanced troubleshooting only.
